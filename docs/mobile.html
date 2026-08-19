@@ -843,6 +843,14 @@ function selectParty(p){
   if(!units[p]) units[p]={};
   renderPartyList(document.getElementById('partySearch').value);
   renderOrderSheet();
+  // Show FAB
+  const fab=document.getElementById('fabHome');
+  if(fab) fab.classList.add('visible');
+  // Auto-scroll to Add Product field
+  setTimeout(()=>{
+    const inp=document.getElementById('newProduct');
+    if(inp){ inp.scrollIntoView({behavior:'smooth',block:'center'}); }
+  }, 200);
 }
 
 // Order sheet
@@ -1201,6 +1209,24 @@ updateDbStatus();
 renderPartyList();
 autoLoadFromGitHub();
 if(Object.keys(quantities).length>0){setTimeout(()=>showToast('Restored your previous entries'),400);}
+
+
+// FAB: tap to go back to party list
+document.getElementById('fabHome').addEventListener('click', ()=>{
+  currentParty = null;
+  // Hide FAB
+  document.getElementById('fabHome').classList.remove('visible');
+  // Clear order sheet
+  renderOrderSheet();
+  // Clear party selection highlight
+  renderPartyList('');
+  // Clear search
+  document.getElementById('partySearch').value = '';
+  // Scroll to top
+  window.scrollTo({top: 0, behavior: 'smooth'});
+  // Focus search
+  setTimeout(()=>{ document.getElementById('partySearch').focus(); }, 300);
+});
 
 </script>
 </body>
