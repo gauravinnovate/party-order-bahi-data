@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Order Bahi Mobile</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Party Order Bahi</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Zilla+Slab:wght@500;600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
@@ -114,6 +114,48 @@ h1{font-family:'Zilla Slab',serif;font-weight:700;font-size:22px;margin:0;color:
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
 @keyframes rowFlash{0%{background:rgba(180,121,30,0.45);}100%{background:transparent;}}
 tr.row-flash{animation:rowFlash 1.5s ease-out;}
+
+@media (max-width: 700px) {
+  header.top{padding:10px 12px;flex-direction:column;align-items:flex-start;gap:8px;}
+  .brand>div>p{display:none;}
+  h1{font-size:18px;}
+  .seal{width:38px;height:38px;font-size:8px;}
+  .header-right{width:100%;flex-direction:row;justify-content:space-between;align-items:center;}
+  .today strong{font-size:12px;}
+  .db-status{font-size:9px;}
+  .layout{flex-direction:column;overflow:auto;}
+  .sidebar{width:100%;height:auto;max-height:42vh;border-right:none;border-bottom:2px solid var(--paper-line);overflow:hidden;}
+  .sidebar-pane{max-height:32vh;}
+  #partyList{max-height:22vh;overflow-y:auto;}
+  #productResults{max-height:22vh;overflow-y:auto;}
+  .main-area{padding:12px;overflow-y:auto;}
+  .controls-row{grid-template-columns:1fr;gap:8px;}
+  .order-table thead th.last-col{display:none;}
+  .order-table td.last-col{display:none;}
+  .order-table thead th.qty-col,.order-table thead th.unit-col{width:54px;}
+  .qty-input{width:50px;font-size:11px;}
+  .unit-select{width:48px;font-size:10px;}
+  .order-table td{padding:6px 4px;font-size:11.5px;}
+  .order-table thead th{padding:6px 4px;font-size:11px;}
+  .footer-bar{flex-direction:column;align-items:stretch;gap:8px;}
+  .action-btns{justify-content:stretch;}
+  .action-btns button{flex:1;}
+  .stamp-btn{transform:none;font-size:11px;padding:8px 10px;}
+  .stamp-btn:hover:not(:disabled){transform:none;}
+  .review-panel{max-height:90vh;border-radius:16px 16px 0 0;}
+  .review-modal{align-items:flex-end;}
+  .review-content{padding:10px 12px;}
+  .review-actions{padding:10px 12px;}
+  .ri-qty input{width:50px;}
+  .ri-qty select{width:50px;}
+  .wa-note{font-size:9.5px;}
+  .party-total-info{display:none;}
+}
+@media (max-width: 700px) {
+  .app{-webkit-overflow-scrolling:touch;}
+  *{-webkit-tap-highlight-color:transparent;}
+}
+
 </style>
 </head>
 <body>
