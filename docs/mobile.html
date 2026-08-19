@@ -156,6 +156,11 @@ tr.row-flash{animation:rowFlash 1.5s ease-out;}
   *{-webkit-tap-highlight-color:transparent;}
 }
 
+
+.fab{position:fixed;bottom:24px;right:16px;width:54px;height:54px;border-radius:50%;background:var(--maroon);border:none;color:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 4px 16px rgba(124,35,49,0.35);z-index:50;opacity:0;pointer-events:none;transform:scale(0.7) translateY(20px);transition:opacity .25s ease,transform .25s ease;}
+.fab.visible{opacity:1;pointer-events:auto;transform:scale(1) translateY(0);}
+.fab:active{transform:scale(0.88);}
+
 </style>
 </head>
 <body>
@@ -205,6 +210,10 @@ tr.row-flash{animation:rowFlash 1.5s ease-out;}
   </div>
 </div>
 <div class="toast" id="toast"></div>
+
+<button class="fab" id="fabHome" title="Back to parties">
+  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+</button>
 <div id="reviewModal" class="review-modal" style="display:none;">
   <div class="review-panel">
     <div class="review-head">
@@ -325,6 +334,7 @@ function selectParty(p){
   if(!units[p]) units[p]={};
   renderPartyList(document.getElementById('partySearch').value);
   renderOrderSheet();
+  updateFabVisibility();
 }
 
 // Order sheet
@@ -680,6 +690,31 @@ document.getElementById('reviewSendBtn').addEventListener('click',confirmSend);
 // Init
 updateDbStatus();
 renderPartyList();
+
+// FAB - show when party selected, tap to go back to party list
+function updateFabVisibility(){
+  const fab = document.getElementById('fabHome');
+  if(!fab) return;
+  if(currentParty && window.innerWidth <= 700){
+    fab.classList.add('visible');
+  } else {
+    fab.classList.remove('visible');
+  }
+}
+document.getElementById('fabHome').addEventListener('click', ()=>{
+  currentParty = null;
+  renderPartyList('');
+  renderOrderSheet();
+  document.getElementById('partySearch').value = '';
+  document.getElementById('partySearch').focus();
+  updateFabVisibility();
+  // scroll party list to top
+  document.getElementById('partyList').scrollTop = 0;
+  // scroll page to top
+  window.scrollTo({top: 0, behavior: 'smooth'});
+});
+window.addEventListener('resize', updateFabVisibility);
+
 autoLoadFromGitHub();
 if(Object.keys(quantities).length>0){setTimeout(()=>showToast('Restored your previous entries'),400);}
 </script>
