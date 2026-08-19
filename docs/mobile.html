@@ -157,8 +157,8 @@ tr.row-flash{animation:rowFlash 1.5s ease-out;}
 }
 
 
-.fab{position:fixed;bottom:24px;right:16px;width:54px;height:54px;border-radius:50%;background:var(--maroon);border:none;color:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 4px 16px rgba(124,35,49,0.35);z-index:50;opacity:0;pointer-events:none;transform:scale(0.7) translateY(20px);transition:opacity .25s ease,transform .25s ease;}
-.fab.visible{opacity:1;pointer-events:auto;transform:scale(1) translateY(0);}
+.fab{position:fixed;bottom:max(24px, env(safe-area-inset-bottom, 24px));right:16px;width:54px;height:54px;border-radius:50%;background:var(--maroon);border:none;color:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 4px 16px rgba(124,35,49,0.35);z-index:50;opacity:0;pointer-events:none;transform:scale(0.7) translateY(20px);transition:opacity .25s ease,transform .25s ease;}
+.fab.visible{opacity:1 !important;pointer-events:auto !important;transform:scale(1) translateY(0) !important;}
 .fab:active{transform:scale(0.88);}
 
 </style>
@@ -695,7 +695,7 @@ renderPartyList();
 function updateFabVisibility(){
   const fab = document.getElementById('fabHome');
   if(!fab) return;
-  if(currentParty && window.innerWidth <= 700){
+  if(currentParty){
     fab.classList.add('visible');
   } else {
     fab.classList.remove('visible');
@@ -713,7 +713,7 @@ document.getElementById('fabHome').addEventListener('click', ()=>{
   // scroll page to top
   window.scrollTo({top: 0, behavior: 'smooth'});
 });
-window.addEventListener('resize', updateFabVisibility);
+
 
 autoLoadFromGitHub();
 if(Object.keys(quantities).length>0){setTimeout(()=>showToast('Restored your previous entries'),400);}
