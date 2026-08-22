@@ -1095,9 +1095,9 @@ function confirmSend(){
     e.forEach(([p,q,u])=>{lastOrdered[lKey(currentParty,p)]={qty:q,unit:u};});
     ls_set(SK,lastOrdered);
     renderTableBody(document.getElementById('prodSearch').value);
-    const msg='Order for '+currentParty+' ('+todayStr+')\n\nPDF saved to your downloads. Please attach using the \uD83D\uDCCE button.';
+    const msg='Order for '+currentParty+' ('+todayStr+') - PDF saved to downloads. Please attach it manually.';
     setTimeout(()=>window.open('https://wa.me/'+num+'?text='+encodeURIComponent(msg),'_blank'),300);
-    statusEl.textContent='✓ PDF downloaded & WhatsApp opened. Tap \uD83D\uDCCE to attach PDF.';
+    statusEl.textContent='PDF downloaded. Open WhatsApp and attach the PDF.';
     confirmBtn.textContent='Send Again';cancelBtn.textContent='Done';
   }
 }
